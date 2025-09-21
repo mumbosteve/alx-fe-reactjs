@@ -1,53 +1,41 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useRecipeStore } from './recipeStore';
+import { useState } from "react";
+import { useRecipeStore } from "../recipeStore";
 
-const EditRecipeForm = () => {
-  const { id } = useParams();
-  const recipeId = Number(id);
-  const navigate = useNavigate();
+const EditRecipeForm = ({ recipe, onClose }) => {
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
+  const [title, setTitle] = useState(recipe.title);
+  const [description, setDescription] = useState(recipe.description);
 
-  const recipe = useRecipeStore((s) => s.recipes.find((r) => r.id === recipeId));
-  const updateRecipe = useRecipeStore((s) => s.updateRecipe);
+  const handleSubmit = (event) => {
+    event.preventDefault(); // ✅ Prevents page reload
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+    updateRecipe({
+      id: recipe.id,
+      title,
+      description,
+    });
 
-  // initialize form when recipe loads
-  useEffect(() => {
-    if (recipe) {
-      setTitle(recipe.title);
-      setDescription(recipe.description);
-    }
-  }, [recipe]);
-
-  if (!recipe) {
-    return (
-      <div style={{ padding: 20 }}>
-        <p>Recipe not found.</p>
-        <button onClick={() => navigate('/')}>Back</button>
-      </div>
-    );
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateRecipe({ id: recipeId, title: title.trim(), description: description.trim() });
-    navigate(`/recipe/${recipeId}`);
+    if (onClose) onClose();
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Edit Recipe</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 480 }}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" rows={6} />
-        <div>
-          <button type="submit" style={{ marginRight: 8 }}>Save</button>
-          <button type="button" onClick={() => navigate(-1)}>Cancel</button>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Edit Title"
+      />
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Edit Description"
+      />
+      <button type="submit">Save Changes</button>
+      <button type="button" onClick={onClose}>
+        Cancel
+      </button>
+    </form>
   );
 };
 

@@ -6,10 +6,8 @@ function AddRecipeForm() {
   const [steps, setSteps] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Validation
+  // ✅ Separate validate function
+  const validate = () => {
     let validationErrors = {};
     if (!title.trim()) validationErrors.title = "Recipe title is required.";
     if (!ingredients.trim()) {
@@ -19,6 +17,13 @@ function AddRecipeForm() {
     }
     if (!steps.trim()) validationErrors.steps = "Preparation steps are required.";
 
+    return validationErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validationErrors = validate();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {

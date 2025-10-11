@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Profile from "./pages/Profile";
+import Profile from "./components/Profile";
 import BlogPost from "./pages/BlogPost";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";

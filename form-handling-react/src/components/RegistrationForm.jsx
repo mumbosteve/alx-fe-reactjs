@@ -1,15 +1,40 @@
 import React, { useState } from "react";
 
 export default function RegistrationForm() {
-  // Step 1: Create state for each input
+  // Step 1: State variables for controlled inputs
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  // Step 2: Handle form submission
+  // Step 2: Validate inputs
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", { username, email, password });
+
+    const newErrors = {};
+
+    // Basic validation checks
+    if (!username.trim()) {
+      newErrors.username = "Username is required";
+    }
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    // If there are validation errors, set them and stop submission
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // Clear errors if form is valid
+    setErrors({});
+    console.log("Form submitted successfully:", { username, email, password });
   };
 
   return (
@@ -32,9 +57,13 @@ export default function RegistrationForm() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
+            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+              errors.username ? "border-red-500" : "focus:ring-blue-400"
+            }`}
           />
+          {errors.username && (
+            <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+          )}
         </div>
 
         {/* Email */}
@@ -47,9 +76,13 @@ export default function RegistrationForm() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
+            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+              errors.email ? "border-red-500" : "focus:ring-blue-400"
+            }`}
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          )}
         </div>
 
         {/* Password */}
@@ -62,9 +95,13 @@ export default function RegistrationForm() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
+            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+              errors.password ? "border-red-500" : "focus:ring-blue-400"
+            }`}
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+          )}
         </div>
 
         {/* Submit Button */}

@@ -1,73 +1,93 @@
 import React, { useState } from "react";
 
-const RegistrationForm = () => {
+export default function RegistrationForm() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
-  const [error, setError] = useState("");
-
+  // handle input change
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
+  // handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Basic validation
-    if (!formData.username || !formData.email || !formData.password) {
-      setError("All fields are required!");
-      return;
-    }
-
-    setError("");
-    console.log("Submitted Data:", formData);
-    alert("Form submitted successfully!");
+    console.log("Form submitted:", formData);
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg p-6 mt-10 rounded-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">User Registration</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-2xl shadow-md w-full max-w-sm"
+      >
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          Registration Form
+        </h2>
 
-        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+        {/* Username */}
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-1" htmlFor="username">
+            Username
+          </label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            value={formData.username}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
 
+        {/* Email */}
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-1" htmlFor="email">
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        {/* Password */}
+        <div className="mb-6">
+          <label className="block text-gray-700 mb-1" htmlFor="password">
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white p-2 rounded"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold"
         >
           Register
         </button>
       </form>
     </div>
   );
-};
-
-export default RegistrationForm;
-
+}

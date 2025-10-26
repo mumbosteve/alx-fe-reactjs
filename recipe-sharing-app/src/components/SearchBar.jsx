@@ -1,20 +1,38 @@
-// src/components/SearchBar.jsx
+// SearchBar.js
 import React from 'react';
-import { useRecipeStore } from '../recipeStore';
+import { useRecipeStore } from './recipeStore';
 
 const SearchBar = () => {
-  const searchTerm = useRecipeStore((s) => s.searchTerm);
-  const setSearchTerm = useRecipeStore((s) => s.setSearchTerm);
+  const searchTerm = useRecipeStore(state => state.searchTerm);
+  const setSearchTerm = useRecipeStore(state => state.setSearchTerm);
+  const filterRecipes = useRecipeStore(state => state.filterRecipes);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    // Trigger filtering when search term changes
+    setTimeout(() => filterRecipes(), 100);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    filterRecipes();
+  };
 
   return (
-    <div style={{ marginBottom: 12 }}>
-      <input
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search by title or ingredient..."
-        style={{ width: '100%', padding: '8px', borderRadius: 6, border: '1px solid #ccc' }}
-      />
-    </div>
+    <form onSubmit={handleSearchSubmit} className="search-bar">
+      <div className="search-input-container">
+        <input
+          type="text"
+          placeholder="Search recipes by name, description, or ingredients..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="search-input"
+        />
+        <button type="submit" className="search-button">
+          🔍
+        </button>
+      </div>
+    </form>
   );
 };
 

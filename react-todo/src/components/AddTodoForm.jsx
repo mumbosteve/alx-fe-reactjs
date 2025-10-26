@@ -1,31 +1,29 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import './AddTodoForm.css';
 
-export default function AddTodoForm({ onAdd }) {
-  const [input, setInput] = useState("");
+const AddTodoForm = ({ onAdd }) => {
+  const [input, setInput] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.trim()) {
-      onAdd(input);
-      setInput("");
+      onAdd(input.trim());
+      setInput('');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mt-4">
+    <form onSubmit={handleSubmit} className="add-todo-form">
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Add a new todo..."
-        className="border p-2 rounded w-full"
+        className="todo-input"
       />
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Add
-      </button>
+      <button type="submit" className="add-button">Add Todo</button>
     </form>
   );
-}
+};
+
+export default AddTodoForm;

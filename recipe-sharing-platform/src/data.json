@@ -3,41 +3,48 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/600x400",
-    "ingredients": [
-      "200g spaghetti",
-      "100g pancetta",
-      "2 eggs",
-      "50g parmesan cheese",
-      "Black pepper"
-    ],
-    "instructions": [
-      "Cook spaghetti in salted water until al dente.",
-      "Fry pancetta until crispy.",
-      "Beat eggs with grated parmesan.",
-      "Combine spaghetti, pancetta, and egg mixture off the heat.",
-      "Season with black pepper and serve immediately."
-    ]
+    "image": "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=300&fit=crop",
+    "cookingTime": 20,
+    "difficulty": "Medium"
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
-    "summary": "Chunks of grilled chicken cooked in a creamy tomato-based gravy.",
-    "image": "https://via.placeholder.com/600x400",
-    "ingredients": [
-      "500g chicken breast",
-      "1 cup yogurt",
-      "2 tbsp garam masala",
-      "1 onion",
-      "400g canned tomatoes",
-      "1/2 cup cream"
-    ],
-    "instructions": [
-      "Marinate chicken in yogurt and spices for at least 1 hour.",
-      "Grill chicken until cooked.",
-      "Fry onions, add tomatoes and simmer.",
-      "Add cream and grilled chicken pieces.",
-      "Simmer for 10 minutes and serve with rice or naan."
-    ]
+    "summary": "Chunks of grilled chicken cooked in a smooth buttery & creamy tomato based gravy.",
+    "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop",
+    "cookingTime": 40,
+    "difficulty": "Medium"
+  },
+  {
+    "id": 3,
+    "title": "Avocado Toast",
+    "summary": "Simple yet delicious smashed avocado on toasted bread with seasonings.",
+    "image": "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400&h=300&fit=crop",
+    "cookingTime": 10,
+    "difficulty": "Easy"
+  },
+  {
+    "id": 4,
+    "title": "Beef Lasagna",
+    "summary": "Layered pasta with rich meat sauce, cheese, and creamy béchamel.",
+    "image": "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&h=300&fit=crop",
+    "cookingTime": 60,
+    "difficulty": "Hard"
+  },
+  {
+    "id": 5,
+    "title": "Chocolate Chip Cookies",
+    "summary": "Classic homemade cookies with melty chocolate chips and crispy edges.",
+    "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=300&fit=crop",
+    "cookingTime": 25,
+    "difficulty": "Easy"
+  },
+  {
+    "id": 6,
+    "title": "Vegetable Stir Fry",
+    "summary": "Colorful mixed vegetables quickly cooked in a savory Asian-inspired sauce.",
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&h=300&fit=crop",
+    "cookingTime": 15,
+    "difficulty": "Easy"
   }
 ]

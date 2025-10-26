@@ -1,14 +1,9 @@
-import UserProfile from './UserProfile';
+import WelcomeMessage from './components/WelcomeMessage';
 
 function App() {
   return (
     <div>
-      <h1>User Profile Example</h1>
-      <UserProfile 
-        name="Alice" 
-        age="25" 
-        bio="Loves hiking and photography" 
-      />
+      <WelcomeMessage />
     </div>
   );
 }

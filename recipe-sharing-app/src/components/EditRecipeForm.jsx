@@ -65,6 +65,7 @@ const EditRecipeForm = () => {
   };
 
   const handleSubmit = (e) => {
+    // Add event.preventDefault() to prevent default form submission
     e.preventDefault();
     
     // Filter out empty ingredients
@@ -72,6 +73,11 @@ const EditRecipeForm = () => {
     
     if (filteredIngredients.length === 0) {
       alert('Please add at least one ingredient');
+      return;
+    }
+
+    if (!formData.title.trim() || !formData.description.trim() || !formData.instructions.trim()) {
+      alert('Please fill in all required fields');
       return;
     }
 
@@ -88,7 +94,9 @@ const EditRecipeForm = () => {
     return (
       <div className="edit-recipe">
         <h2>Recipe not found</h2>
-        <button onClick={() => navigate('/')}>Back to Recipes</button>
+        <button onClick={() => navigate('/')} className="btn btn-secondary">
+          Back to Recipes
+        </button>
       </div>
     );
   }

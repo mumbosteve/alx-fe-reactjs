@@ -3,6 +3,11 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import TodoList from '../components/TodoList';
 
+// Mock CSS imports
+jest.mock('../components/TodoList.css', () => ({}));
+jest.mock('../components/AddTodoForm.css', () => ({}));
+jest.mock('../components/TodoItem.css', () => ({}));
+
 describe('TodoList Component', () => {
   test('renders initial todos', () => {
     render(<TodoList />);
@@ -40,15 +45,16 @@ describe('TodoList Component', () => {
     render(<TodoList />);
     
     const todoText = screen.getByText('Learn React');
+    const todoItem = todoText.closest('div');
     
     // Initially not completed
-    expect(todoText).not.toHaveStyle('text-decoration: line-through');
+    expect(todoItem).not.toHaveClass('completed');
     
     // Click to complete
     fireEvent.click(todoText);
     
     // Should now be completed
-    expect(todoText.parentElement).toHaveClass('completed');
+    expect(todoItem).toHaveClass('completed');
   });
 
   test('deletes a todo', () => {
@@ -56,10 +62,15 @@ describe('TodoList Component', () => {
     
     const deleteButtons = screen.getAllByText('Delete');
     const initialCount = deleteButtons.length;
+    const todoToDelete = screen.getByText('Learn React');
     
     // Delete first todo
     fireEvent.click(deleteButtons[0]);
     
+    // Check if todo is removed
+    expect(todoToDelete).not.toBeInTheDocument();
+    
+    // Check if count decreased
     const remainingDeleteButtons = screen.getAllByText('Delete');
     expect(remainingDeleteButtons.length).toBe(initialCount - 1);
   });
